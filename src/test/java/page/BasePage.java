@@ -12,6 +12,7 @@ public class BasePage<T extends BasePage<T>> {
     }
 
     protected Elements elementHelper = new Elements();
+
     @SuppressWarnings("unchecked")
     protected T getCurrentPage() {
         return (T) this;
