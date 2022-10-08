@@ -1,5 +1,6 @@
 package page;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import data.OptionFilterable;
 import elements.CommonElementUtils;
@@ -24,9 +25,24 @@ public class BasePage<T extends BasePage<T>> {
 
     protected <O extends OptionFilterable> T setFilterCheckboxGroup(SelenideElement filterElement, Set<O> optionSet) {
         elementHelper.getFilterOptions(filterElement).asFixedIterable()
-                .forEach(filterOption -> elementHelper.setCheckBox(elementHelper.getFilterCheckBox(filterOption),
-                        isOptionContains(optionSet, elementHelper.getFilterOptionLabel(filterOption))));
+                .forEach(filterOption -> setFilterOptionCheckbox(filterOption,
+                        isOptionContains(optionSet, elementHelper.getFilterOptionLabel(filterOption).getText())));
         return getCurrentPage();
+    }
+
+
+    protected boolean isChecked(SelenideElement checkBoxElement) {
+        return elementHelper.getFilterCheckBox(checkBoxElement).is(Condition.checked);
+    }
+
+    protected void setFilterOption(SelenideElement filterOptionElement) {
+        elementHelper.getFilterOptionLabel(filterOptionElement).scrollIntoView("{behavior: \"auto\"}").click();
+    }
+
+    protected void setFilterOptionCheckbox(SelenideElement filterOptionElement, boolean value) {
+        if (value != isChecked(filterOptionElement)) {
+            setFilterOption(filterOptionElement);
+        }
     }
 
     protected T setFilterRadio(SelenideElement filterElement, OptionFilterable option) {

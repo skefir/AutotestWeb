@@ -1,6 +1,8 @@
 package config;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import lombok.SneakyThrows;
 import lombok.Synchronized;
 import org.apache.commons.configuration2.FileBasedConfiguration;
@@ -31,6 +33,7 @@ public class TestConfiguration {
             Configuration.remote = remoteUrl;
         }
         Configuration.browserSize = instance.getString("selenide.browser.size", "1920x1080");
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
     }
 
     @SneakyThrows

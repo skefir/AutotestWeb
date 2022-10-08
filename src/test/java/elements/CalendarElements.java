@@ -8,7 +8,7 @@ public interface CalendarElements {
         return Selenide.$("#calendarContainer");
     }
     default SelenideElement getFilterArea() {
-        return getCalendarRoot().$("#calendarContainer");
+        return getCalendarRoot().$("#economicCalendarFilter");
     }
 
     default SelenideElement getCurrenciesFilter() {
