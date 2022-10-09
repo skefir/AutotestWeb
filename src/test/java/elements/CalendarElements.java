@@ -20,4 +20,8 @@ public interface CalendarElements {
     default SelenideElement getImportanceFilter() {
         return getFilterArea().$("ul#economicCalendarFilterImportance");
     }
+
+    default SelenideElement getMainTable() {
+        return getCalendarRoot().$x(".//div[@class='ec-table' and .//div[@id='economicCalendarTable']]");
+    }
 }

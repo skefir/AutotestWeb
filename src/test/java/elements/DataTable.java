@@ -3,7 +3,7 @@ package elements;
 import com.codeborne.selenide.SelenideElement;
 import data.DataTableColumn;
 
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,10 +15,10 @@ public class DataTable<E extends DataTableColumn> {
 
     private final Map<E, Integer> columnsNumbers;
 
-    public DataTable(SelenideElement rootElement, Set<E> columns, Class<E> clazz) {
+    public DataTable(SelenideElement rootElement, Set<E> columns) {
         this.rootElement = rootElement;
         this.columns = columns;
-        columnsNumbers = new EnumMap<>(clazz);
+        columnsNumbers = new HashMap<>();
     }
 
     private int getCollumnNumber(E column) {
@@ -38,5 +38,4 @@ public class DataTable<E extends DataTableColumn> {
     public SelenideElement getColumn(SelenideElement rowElement, E column) {
         return rowElement.$x(".//div[contains(@class,'ec-table__col')][" + getCollumnNumber(column) + "]");
     }
-
 }

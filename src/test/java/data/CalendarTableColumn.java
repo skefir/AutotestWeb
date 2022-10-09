@@ -2,7 +2,7 @@ package data;
 
 import lombok.Getter;
 
-public enum CalendarTableColumn implements DataTableColumn<CalendarTableColumn> {
+public enum CalendarTableColumn implements DataTableColumn {
     TIME(    "Time,"),
     CURRENCY("Currency"),
     EVENT(   "Event"),

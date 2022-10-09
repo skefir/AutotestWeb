@@ -30,6 +30,7 @@ public class CalendarTests {
         Set<ImportanceFilterOption> importanceSet = EnumSet.of(ImportanceFilterOption.MEDIUM);
         calendarPage.setCurrenciesFilter(currenciesSet)
                 .setDateFilter(DateFilterOptions.CURRENT_MONTH)
-                .setImportanceFilter(importanceSet);
+                .setImportanceFilter(importanceSet)
+                .enterToEventByNumber(1);
     }
 }

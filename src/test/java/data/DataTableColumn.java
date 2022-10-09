@@ -1,5 +1,5 @@
 package data;
 
-public interface DataTableColumn<E extends Enum<E>> {
+public interface DataTableColumn {
     String getTitle();
 }
