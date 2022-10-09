@@ -11,8 +11,8 @@ public class TabControl<T extends ControlTabEntity> {
         this.rootElement = rootElement;
     }
 
-    public void enterToTab(T tab) {
-        rootElement.$x(".//li[text()=" + tab.getTitle() + "]").click();
+    public SelenideElement getTab(T tab) {
+        return rootElement.$x(".//li[text()='" + tab.getTitle() + "']");
     }
 
 }

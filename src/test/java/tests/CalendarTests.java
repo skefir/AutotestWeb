@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import config.BaseTestExtension;
+import data.CalendarEventInfoTab;
 import data.Currencies;
 import data.DateFilterOptions;
 import data.ImportanceFilterOption;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import page.CalendarEventInfoPage;
 import page.CalendarPage;
 
 import java.util.EnumSet;
@@ -24,6 +26,8 @@ public class CalendarTests {
 
     private final CalendarPage calendarPage = new CalendarPage();
 
+    private final CalendarEventInfoPage calendarEventInfoPage = new CalendarEventInfoPage();
+
     @Test
     public void expTest() {
         Set<Currencies> currenciesSet = EnumSet.of(Currencies.CHF);
@@ -32,5 +36,6 @@ public class CalendarTests {
                 .setDateFilter(DateFilterOptions.CURRENT_MONTH)
                 .setImportanceFilter(importanceSet)
                 .enterToEventByNumber(1);
+        calendarEventInfoPage.goToTab(CalendarEventInfoTab.HISTORY);
     }
 }

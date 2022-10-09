@@ -2,7 +2,7 @@ package data;
 
 import lombok.Getter;
 
-public enum CalendarEventInfoTab {
+public enum CalendarEventInfoTab implements ControlTabEntity {
     OVERVIEW("Overview"),
     CHART("Chart"),
     HISTORY("History"),
