@@ -20,7 +20,7 @@ public enum Currencies implements OptionFilterable  {
     USD("US dollar"),
     ZAR("South African rand");
 
-    private String currencyName;
+    private final String currencyName;
 
 
     Currencies(String currencyName) {

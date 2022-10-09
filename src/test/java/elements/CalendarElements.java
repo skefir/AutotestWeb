@@ -14,4 +14,10 @@ public interface CalendarElements {
     default SelenideElement getCurrenciesFilter() {
         return getFilterArea().$("ul#economicCalendarFilterCurrency");
     }
+    default SelenideElement getDateFilter() {
+        return getFilterArea().$("ul#economicCalendarFilterDate");
+    }
+    default SelenideElement getImportanceFilter() {
+        return getFilterArea().$("ul#economicCalendarFilterImportance");
+    }
 }

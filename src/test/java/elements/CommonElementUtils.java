@@ -21,6 +21,6 @@ public interface CommonElementUtils {
     }
 
     default SelenideElement getFilterOption(SelenideElement rootFilterElement,  OptionFilterable option) {
-        return rootFilterElement.$x(".//li[.//label[text()='" + option.getTitle() + "']]//input");
+        return rootFilterElement.$x(".//li[.//label[text()='" + option.getTitle() + "']]");
     }
 }
