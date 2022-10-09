@@ -13,14 +13,18 @@ import java.util.stream.Collectors;
 
 public class DataTable<E extends DataTableColumn> {
 
+
     private final SelenideElement rootElement;
+
+    private final String classPrefix;
 
     private final Set<E> columns;
 
     private Map<E, Integer> columnsNumbers = null;
 
-    public DataTable(SelenideElement rootElement, Set<E> columns) {
+    public DataTable(SelenideElement rootElement, String classPrefix, Set<E> columns) {
         this.rootElement = rootElement;
+        this.classPrefix = classPrefix;
         this.columns = columns;
     }
 
@@ -45,8 +49,9 @@ public class DataTable<E extends DataTableColumn> {
             List<String> headerList = getTableHeaders().asFixedIterable()
                     .stream().map(element -> element.getOwnText().trim()).collect(Collectors.toList());
             columns.forEach(column -> {
-                if (headerList.indexOf(column.getTitle()) != -1) {
-                    columnsNumbers.put(column, headerList.indexOf(column.getTitle()));
+                int index = headerList.indexOf(column.getTitle());
+                if (index != -1) {
+                    columnsNumbers.put(column, index);
                 }
             });
         }
@@ -54,14 +59,15 @@ public class DataTable<E extends DataTableColumn> {
 
     private ElementsCollection getTableHeaders() {
         return rootElement
-                .$$(".ec-table__header .ec-table__col");
+                .$$(String.format(".%s__header .%s__col", classPrefix, classPrefix));
     }
 
     public SelenideElement getRowByNumber(int rowNumber) {
-        return rootElement.$x(".//div[@class='ec-table__body']//div[@class='ec-table__item'][" + rowNumber + "]");
+        return rootElement.$x(String.format(".//div[@class='%s__body']//div[@class='%s__item'][%d]"
+                , classPrefix, classPrefix, rowNumber));
     }
 
     public SelenideElement getColumn(SelenideElement rowElement, E column) {
-        return rowElement.$$(".ec-table__col").get(getCollumnNumber(column));
+        return rowElement.$$(String.format(".%s__col", classPrefix)).get(getCollumnNumber(column));
     }
 }

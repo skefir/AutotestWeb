@@ -19,7 +19,7 @@ public class CalendarPage extends BasePage<CalendarPage> {
     protected CalendarPageElements elementHelper = new CalendarPageElements();
 
     private final DataTable<CalendarTableColumn> calendarMainDataTable =
-            new DataTable<>(elementHelper.getMainTable(), EnumSet.allOf(CalendarTableColumn.class));
+            new DataTable<>(elementHelper.getMainTable(), "ec-table", EnumSet.allOf(CalendarTableColumn.class));
 
     @Step("Устанавливаем фильтр валют занчениями {0}")
     public CalendarPage setCurrenciesFilter(Set<Currencies> currenciesSet) {
