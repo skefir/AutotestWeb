@@ -21,5 +21,9 @@ public interface CalendarEventInfoElements {
         return getEventRoot().$("ul#calendar-tabs");
     }
 
+    default SelenideElement getEventHistoryTable() {
+        return getEventRoot().$("#tab_content_history");
+    }
+
 
 }

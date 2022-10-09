@@ -2,10 +2,7 @@ package tests;
 
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import config.BaseTestExtension;
-import data.CalendarEventInfoTab;
-import data.Currencies;
-import data.DateFilterOptions;
-import data.ImportanceFilterOption;
+import data.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,5 +34,6 @@ public class CalendarTests {
                 .setImportanceFilter(importanceSet)
                 .enterToEventByNumber(1);
         calendarEventInfoPage.goToTab(CalendarEventInfoTab.HISTORY);
+        log.error("column={}", calendarEventInfoPage.getColumn(0, EventHistoryColumn.REFERENCE));
     }
 }

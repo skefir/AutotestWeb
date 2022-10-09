@@ -6,6 +6,7 @@ import data.DateFilterOptions;
 import data.ImportanceFilterOption;
 import elements.CalendarElements;
 import elements.DataTable;
+import elements.GropingDataTable;
 import io.qameta.allure.Step;
 
 import java.util.EnumSet;
@@ -18,8 +19,8 @@ public class CalendarPage extends BasePage<CalendarPage> {
 
     protected CalendarPageElements elementHelper = new CalendarPageElements();
 
-    private final DataTable<CalendarTableColumn> calendarMainDataTable =
-            new DataTable<>(elementHelper.getMainTable(), "ec-table", EnumSet.allOf(CalendarTableColumn.class));
+    private final GropingDataTable<CalendarTableColumn> calendarMainDataTable =
+            new GropingDataTable<>(elementHelper.getMainTable(), "ec-table", EnumSet.allOf(CalendarTableColumn.class));
 
     @Step("Устанавливаем фильтр валют занчениями {0}")
     public CalendarPage setCurrenciesFilter(Set<Currencies> currenciesSet) {
