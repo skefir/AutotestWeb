@@ -5,23 +5,24 @@ import com.codeborne.selenide.SelenideElement;
 import data.DataTableColumn;
 import lombok.Synchronized;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class GropingDataTable<E extends DataTableColumn> extends DataTable<E> {
 
+    protected AtomicBoolean initFlag = new AtomicBoolean(false);
+
     public GropingDataTable(SelenideElement rootElement, String classPrefix, Set<E> columns) {
         super(rootElement, classPrefix, columns);
-        columnsNumbers = null;
     }
 
     protected int getColumnNumber(E column) {
         if (!columns.contains(column)) {
             throw new IllegalArgumentException("Illegal column - " + column);
         }
-        if (columnsNumbers == null) {
+        if (!initFlag.get()) {
             calculateColumnNumbers();
         }
 
@@ -33,8 +34,7 @@ public class GropingDataTable<E extends DataTableColumn> extends DataTable<E> {
 
     @Synchronized
     private void calculateColumnNumbers() {
-        if (columnsNumbers == null) {
-            columnsNumbers = new HashMap<>();
+        if (!initFlag.get()) {
             List<String> headerList = getTableHeaders().asFixedIterable()
                     .stream().map(element -> element.getOwnText().trim()).collect(Collectors.toList());
             columns.forEach(column -> {
@@ -43,6 +43,7 @@ public class GropingDataTable<E extends DataTableColumn> extends DataTable<E> {
                     columnsNumbers.put(column, index);
                 }
             });
+            initFlag.set(true);
         }
     }
 

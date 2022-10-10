@@ -1,14 +1,15 @@
 package elements;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import data.DataTableColumn;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class DataTable<E extends DataTableColumn> {
-
 
     protected final SelenideElement rootElement;
 
@@ -16,7 +17,7 @@ public class DataTable<E extends DataTableColumn> {
 
     protected final Set<E> columns;
 
-    protected Map<E, Integer> columnsNumbers = null;
+    protected Map<E, Integer> columnsNumbers;
 
     public DataTable(SelenideElement rootElement, String classPrefix, Set<E> columns) {
         this.rootElement = rootElement;
@@ -36,14 +37,34 @@ public class DataTable<E extends DataTableColumn> {
                         column.getTitle())).size() + 1);
     }
 
-
-
     public SelenideElement getRowByNumber(int rowNumber) {
+        return getRows().get(rowNumber);
+    }
+
+    private ElementsCollection getRows() {
         return rootElement.$$x(String.format(".//div[@class='%s__item']"
-                , classPrefix)).get(rowNumber);
+                , classPrefix));
     }
 
     public SelenideElement getColumn(SelenideElement rowElement, E column) {
         return rowElement.$(String.format("div[class*='%s__']:nth-child(%d)", classPrefix, getColumnNumber(column)));
+    }
+
+    private SelenideElement getBottomArea() {
+        return rootElement.$("div[class*='table__bottom']");
+    }
+
+    private Stream<SelenideElement> getRowsOnPage(SelenideElement paginatorElement) {
+        if (paginatorElement != null) {
+            paginatorElement.scrollIntoView(true).click();
+        }
+        return getRows().asDynamicIterable().stream();
+    }
+
+    public Stream<SelenideElement> getRowStream() {
+        ElementsCollection pagerCollection = getBottomArea().$$("a");
+        Stream<SelenideElement> paginationStream = pagerCollection.size() > 0 ?
+                pagerCollection.asDynamicIterable().stream() : Stream.of(getBottomArea());
+        return paginationStream.flatMap(this::getRowsOnPage);
     }
 }

@@ -34,6 +34,6 @@ public class CalendarTests {
                 .setImportanceFilter(importanceSet)
                 .enterToEventByNumber(1);
         calendarEventInfoPage.goToTab(CalendarEventInfoTab.HISTORY);
-        log.error("column={}", calendarEventInfoPage.getColumn(0, EventHistoryColumn.REFERENCE));
+        log.error("column={}", calendarEventInfoPage.getHistory());
     }
 }
