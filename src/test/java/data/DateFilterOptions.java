@@ -43,4 +43,9 @@ public enum DateFilterOptions implements OptionFilterable {
         this.beginPeriod = beginPeriod;
         this.finishPeriod = finishPeriod;
     }
+
+    @Override
+    public String toString() {
+        return this.name() + " -(" + this.beginPeriod + ", " + this.finishPeriod + ")";
+    }
 }

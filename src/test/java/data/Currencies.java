@@ -32,4 +32,9 @@ public enum Currencies implements OptionFilterable  {
     public String getTitle() {
         return this.name() + " - " + currencyName;
     }
+
+    @Override
+    public String getAltTitle() {
+        return this.name() + ", " + currencyName;
+    }
 }

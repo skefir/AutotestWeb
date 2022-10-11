@@ -1,7 +1,6 @@
 package page;
 
-import data.CalendarEventInfoTab;
-import data.EventHistoryColumn;
+import data.*;
 import elements.CalendarEventInfoElements;
 import elements.DataTable;
 import elements.TabControl;
@@ -11,6 +10,9 @@ import util.DateUtils;
 
 import java.time.LocalDate;
 import java.util.EnumSet;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 public class CalendarEventInfoPage extends BasePage<CalendarEventInfoPage> {
@@ -32,10 +34,43 @@ public class CalendarEventInfoPage extends BasePage<CalendarEventInfoPage> {
         return this;
     }
 
-    @Step("Получаем значение столбца {1} в строке {0}")
-    public String getColumn(int rowNumber, EventHistoryColumn column) {
-        log.info("Получаем значение столбца {} в строке {}", column, rowNumber);
-        return eventHistoryTable.getColumn(eventHistoryTable.getRowByNumber(rowNumber), column).getText();
+    @Step("Проверяем что событие соответствует критериям {0}")
+    public CalendarEventInfoPage checkEventInfo(EventFilteredCondition eventFilteredCondition) {
+        log.info("Проверяем что событие соответствует критериям {}", eventFilteredCondition);
+        checkImportance(eventFilteredCondition.getImportanceSet());
+        checkCurrency(eventFilteredCondition.getCurrenciesSet());
+        checkDate(eventFilteredCondition.getDateFilterOption());
+        return this;
+    }
+
+    @Step("Проверяем что событие имеет важность {0}")
+    public CalendarEventInfoPage checkImportance(Set<ImportanceFilterOption> importanceSet) {
+        log.info("Проверяем что событие имеет важность {}", importanceSet);
+        assertTrue(isOptionContains(importanceSet, elementHelper.getEventImportance().getText()),
+                String.format("Важность события %s должна входить в выбранный фильтр %s"
+                        , elementHelper.getEventImportance().getText(), importanceSet));
+
+        return this;
+    }
+
+    @Step("Проверяем что событие в валюте {0}")
+    public CalendarEventInfoPage checkCurrency(Set<Currencies> currenciesSet) {
+        log.info("Проверяем что событие в валюте {}", currenciesSet);
+        assertTrue(isOptionContains(currenciesSet, elementHelper.getEventCurrency().getText()),
+                String.format("Важность события %s должна входить в выбранный фильтр %s"
+                        , elementHelper.getEventCurrency().getText(), currenciesSet));
+
+        return this;
+    }
+
+    @Step("Проверяем что событие попадает в заданный интервал дат {0}")
+    public CalendarEventInfoPage checkDate(DateFilterOptions dateFilterOptions) {
+        log.info("Проверяем что событие попадает в заданный интервал дат {}", dateFilterOptions);
+        LocalDate eventDate = DateUtils.convertDateTime(elementHelper.getEventDate().getText()).toLocalDate();
+        assertTrue(eventDate.isAfter(dateFilterOptions.getBeginPeriod())
+                        && eventDate.isBefore(dateFilterOptions.getFinishPeriod())
+                , String.format("Дата события %s должна находиться в периоде %s", eventDate, dateFilterOptions));
+        return this;
     }
 
 

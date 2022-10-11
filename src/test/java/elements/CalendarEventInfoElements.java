@@ -17,6 +17,10 @@ public interface CalendarEventInfoElements {
         return getEventRoot().$(".event-table__importance");
     }
 
+    default SelenideElement getEventDate() {
+        return getEventRoot().$("td.event-table__date");
+    }
+
     default SelenideElement getEventTabControl() {
         return getEventRoot().$("ul#calendar-tabs");
     }

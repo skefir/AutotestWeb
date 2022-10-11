@@ -17,6 +17,10 @@ apply plugin: "idea"
 apply plugin: "application"
 apply plugin: "io.qameta.allure"
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 allure {
     autoconfigure = true
     version = '2.19.0'
@@ -67,5 +71,6 @@ dependencies {
 }
 
 test {
+    systemProperty "file.encoding", "utf-8"
     useJUnitPlatform()
 }

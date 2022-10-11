@@ -34,7 +34,8 @@ public class CalendarTests {
                 .setDateFilter(eventFilteredCondition.getDateFilterOption())
                 .setImportanceFilter(eventFilteredCondition.getImportanceSet())
                 .enterToEventByNumber(1);
-        calendarEventInfoPage.goToTab(CalendarEventInfoTab.HISTORY)
+        calendarEventInfoPage.checkEventInfo(eventFilteredCondition)
+                .goToTab(CalendarEventInfoTab.HISTORY)
                 .printHistoryToLog();
 
     }

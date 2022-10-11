@@ -20,8 +20,8 @@ public class BasePage<T extends BasePage<T>> {
         return (T) this;
     }
 
-    private <O extends OptionFilterable> boolean isOptionContains(Set<O> optionSet, String labelOption) {
-        return optionSet.stream().anyMatch(e -> e.getTitle().equals(labelOption));
+    protected <O extends OptionFilterable> boolean isOptionContains(Set<O> optionSet, String labelOption) {
+        return optionSet.stream().anyMatch(e -> e.getTitle().equals(labelOption) || e.getAltTitle().equals(labelOption));
     }
 
     protected <O extends OptionFilterable> T setFilterCheckboxGroup(SelenideElement filterElement, Set<O> optionSet) {
