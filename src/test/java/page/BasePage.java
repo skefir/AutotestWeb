@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import data.OptionFilterable;
 import elements.CommonElementUtils;
+import io.qameta.allure.Allure;
 
 import java.util.Set;
 
@@ -48,5 +49,9 @@ public class BasePage<T extends BasePage<T>> {
     protected T setFilterRadio(SelenideElement filterElement, OptionFilterable option) {
         elementHelper.getFilterOption(filterElement, option).click();
         return getCurrentPage();
+    }
+
+    protected static void addAllureDescription(String title, String info) {
+        Allure.addAttachment(title, info);
     }
 }

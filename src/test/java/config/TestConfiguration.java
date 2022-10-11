@@ -33,7 +33,12 @@ public class TestConfiguration {
             Configuration.remote = remoteUrl;
         }
         Configuration.browserSize = instance.getString("selenide.browser.size", "1920x1080");
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+        SelenideLogger.addListener("AllureSelenide"
+                , new AllureSelenide().screenshots(true)
+                        .savePageSource(true)
+                        .includeSelenideSteps(false));
+
+
     }
 
     @SneakyThrows

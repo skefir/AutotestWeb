@@ -1,8 +1,30 @@
 group 'MetaQuoteTest'
 version '1.0'
-apply plugin: 'idea'
-apply plugin: "application"
 
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.qameta.allure.gradle.allure:allure-plugin:2.11.0"
+    }
+}
+
+apply plugin: "idea"
+apply plugin: "application"
+apply plugin: "io.qameta.allure"
+
+allure {
+    autoconfigure = true
+    version = '2.19.0'
+
+    useJUnit5 {
+        version = '2.19.0'
+    }
+}
 
 sourceCompatibility = 1.8
 
