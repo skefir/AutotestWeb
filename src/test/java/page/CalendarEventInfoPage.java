@@ -1,16 +1,17 @@
 package page;
 
-import com.codeborne.selenide.SelenideElement;
 import data.CalendarEventInfoTab;
 import data.EventHistoryColumn;
 import elements.CalendarEventInfoElements;
 import elements.DataTable;
 import elements.TabControl;
 import io.qameta.allure.Step;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.EnumSet;
-import java.util.stream.Collectors;
+import java.util.Map;
 
+@Slf4j
 public class CalendarEventInfoPage extends BasePage<CalendarEventInfoPage> {
     protected static class CalendarEventInfoPageElements extends Elements implements CalendarEventInfoElements {
     }
@@ -34,9 +35,20 @@ public class CalendarEventInfoPage extends BasePage<CalendarEventInfoPage> {
         return eventHistoryTable.getColumn(eventHistoryTable.getRowByNumber(rowNumber), column).getText();
     }
 
+
     @Step("Получаем содержимое таблицы истории")
-    public String getHistory() {
-        return eventHistoryTable.getRowStream().map(SelenideElement::getText).collect(Collectors.joining());
+    public void printHistoryToLog() {
+        EnumSet<EventHistoryColumn> reportSet = EnumSet.of(EventHistoryColumn.DATE, EventHistoryColumn.ACTUAL,
+                EventHistoryColumn.FORECAST, EventHistoryColumn.PREVIOUS);
+        log.info(String.format("| %-25s             | %20s | %20s | %20s |", EventHistoryColumn.DATE.getTitle(),
+                EventHistoryColumn.ACTUAL.getTitle(), EventHistoryColumn.FORECAST.getTitle()
+                , EventHistoryColumn.PREVIOUS.getTitle()));
+        eventHistoryTable.getRowStream().forEach(e -> {
+            Map<EventHistoryColumn, String> rowMap = eventHistoryTable.extractColumns(e, reportSet);
+            log.info(String.format("| %-25s             | %20s | %20s | %20s |", rowMap.get(EventHistoryColumn.DATE),
+                    rowMap.get(EventHistoryColumn.ACTUAL), rowMap.get(EventHistoryColumn.FORECAST)
+                    , rowMap.get(EventHistoryColumn.PREVIOUS)));
+        });
     }
 
 }

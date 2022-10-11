@@ -7,6 +7,7 @@ import data.DataTableColumn;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DataTable<E extends DataTableColumn> {
@@ -66,5 +67,10 @@ public class DataTable<E extends DataTableColumn> {
         Stream<SelenideElement> paginationStream = pagerCollection.size() > 0 ?
                 pagerCollection.asDynamicIterable().stream() : Stream.of(getBottomArea());
         return paginationStream.flatMap(this::getRowsOnPage);
+    }
+
+    public Map<E, String> extractColumns(SelenideElement rowElement, Set<E> columnsSet) {
+        ElementsCollection rowColumns = rowElement.$$(String.format("div[class*='%s__']", classPrefix));
+        return columnsSet.stream().collect(Collectors.toMap(k -> k, v -> rowColumns.get(getColumnNumber(v) - 1).getText()));
     }
 }
