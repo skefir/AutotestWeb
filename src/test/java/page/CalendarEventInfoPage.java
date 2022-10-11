@@ -7,9 +7,10 @@ import elements.DataTable;
 import elements.TabControl;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
+import util.DateUtils;
 
+import java.time.LocalDate;
 import java.util.EnumSet;
-import java.util.Map;
 
 @Slf4j
 public class CalendarEventInfoPage extends BasePage<CalendarEventInfoPage> {
@@ -43,12 +44,13 @@ public class CalendarEventInfoPage extends BasePage<CalendarEventInfoPage> {
         log.info(String.format("| %-25s             | %20s | %20s | %20s |", EventHistoryColumn.DATE.getTitle(),
                 EventHistoryColumn.ACTUAL.getTitle(), EventHistoryColumn.FORECAST.getTitle()
                 , EventHistoryColumn.PREVIOUS.getTitle()));
-        eventHistoryTable.getRowStream().forEach(e -> {
-            Map<EventHistoryColumn, String> rowMap = eventHistoryTable.extractColumns(e, reportSet);
-            log.info(String.format("| %-25s             | %20s | %20s | %20s |", rowMap.get(EventHistoryColumn.DATE),
-                    rowMap.get(EventHistoryColumn.ACTUAL), rowMap.get(EventHistoryColumn.FORECAST)
-                    , rowMap.get(EventHistoryColumn.PREVIOUS)));
-        });
+        eventHistoryTable.getRowStream().map(e -> eventHistoryTable.extractColumns(e, reportSet))
+                .takeWhile(e -> DateUtils.convertDate(e.get(EventHistoryColumn.DATE)).isAfter(LocalDate.now().minusMonths(12)))
+                .forEach(e -> {
+                    log.info(String.format("| %-25s             | %20s | %20s | %20s |", e.get(EventHistoryColumn.DATE),
+                            e.get(EventHistoryColumn.ACTUAL), e.get(EventHistoryColumn.FORECAST)
+                            , e.get(EventHistoryColumn.PREVIOUS)));
+                });
     }
 
 }

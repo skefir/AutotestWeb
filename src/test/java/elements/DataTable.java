@@ -3,12 +3,12 @@ package elements;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import data.DataTableColumn;
+import rx.Observable;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class DataTable<E extends DataTableColumn> {
 
@@ -55,17 +55,17 @@ public class DataTable<E extends DataTableColumn> {
         return rootElement.$("div[class*='table__bottom']");
     }
 
-    private Stream<SelenideElement> getRowsOnPage(SelenideElement paginatorElement) {
+    private Observable<SelenideElement> getRowsOnPage(SelenideElement paginatorElement) {
         if (paginatorElement != null) {
             paginatorElement.scrollIntoView(true).click();
         }
-        return getRows().asDynamicIterable().stream();
+        return Observable.from(getRows().asDynamicIterable());
     }
 
-    public Stream<SelenideElement> getRowStream() {
+    public Observable<SelenideElement> getRowStream() {
         ElementsCollection pagerCollection = getBottomArea().$$("a");
-        Stream<SelenideElement> paginationStream = pagerCollection.size() > 0 ?
-                pagerCollection.asDynamicIterable().stream() : Stream.of(getBottomArea());
+        Observable<SelenideElement> paginationStream = pagerCollection.size() > 0 ?
+                Observable.from(pagerCollection.asDynamicIterable()) : Observable.from(rootElement.$$("div[class*='table__bottom']"));
         return paginationStream.flatMap(this::getRowsOnPage);
     }
 
