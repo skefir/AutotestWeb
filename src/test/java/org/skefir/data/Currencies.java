@@ -1,4 +1,4 @@
-package data;
+package org.skefir.data;
 
 public enum Currencies implements OptionFilterable  {
     AUD("Australian Dollar"),

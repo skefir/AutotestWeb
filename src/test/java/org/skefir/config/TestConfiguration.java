@@ -1,4 +1,4 @@
-package config;
+package org.skefir.config;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -34,9 +34,13 @@ public class TestConfiguration {
         }
         Configuration.browserSize = instance.getString("selenide.browser.size", "1920x1080");
         SelenideLogger.addListener("AllureSelenide"
-                , new AllureSelenide().screenshots(true)
-                        .savePageSource(true)
-                        .includeSelenideSteps(false));
+                , new AllureSelenide().screenshots(instance.getBoolean("seleinide.report.screenshots", true))
+                        .savePageSource(instance.getBoolean("seleinide.report.savePageSource", false))
+                        .includeSelenideSteps(instance.getBoolean("seleinide.report.includeSelenideSteps", false)));
+        System.setProperty("chromeoptions.args", "--user-agent=" + instance.getString("seleinide.browser.useragent"
+                , "Mozilla/5.0 (compatible; Googlebot/2.1; +https://www.google.com/bot.html)"));
+
+        Configuration.headless = instance.getBoolean("selenide.browser.headless", false);
 
 
     }

@@ -1,7 +1,7 @@
-package elements;
+package org.skefir.elements;
 
 import com.codeborne.selenide.SelenideElement;
-import data.ControlTabEntity;
+import org.skefir.data.ControlTabEntity;
 
 public class TabControl<T extends ControlTabEntity> {
 

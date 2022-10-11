@@ -1,4 +1,4 @@
-package data;
+package org.skefir.data;
 
 public interface OptionFilterable {
     String getTitle();

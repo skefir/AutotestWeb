@@ -1,4 +1,4 @@
-package data;
+package org.skefir.data;
 
 import lombok.Value;
 

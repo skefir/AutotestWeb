@@ -1,4 +1,4 @@
-package util;
+package org.skefir.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

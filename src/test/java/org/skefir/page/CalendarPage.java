@@ -1,12 +1,12 @@
-package page;
+package org.skefir.page;
 
 import com.codeborne.selenide.Selenide;
-import data.CalendarTableColumn;
-import data.Currencies;
-import data.DateFilterOptions;
-import data.ImportanceFilterOption;
-import elements.CalendarElements;
-import elements.GropingDataTable;
+import org.skefir.data.CalendarTableColumn;
+import org.skefir.data.Currencies;
+import org.skefir.data.DateFilterOptions;
+import org.skefir.data.ImportanceFilterOption;
+import org.skefir.elements.CalendarElements;
+import org.skefir.elements.GropingDataTable;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 

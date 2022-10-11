@@ -1,8 +1,8 @@
-package elements;
+package org.skefir.elements;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import data.DataTableColumn;
+import org.skefir.data.DataTableColumn;
 import lombok.Synchronized;
 
 import java.util.List;

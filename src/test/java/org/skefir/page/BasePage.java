@@ -1,9 +1,9 @@
-package page;
+package org.skefir.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import data.OptionFilterable;
-import elements.CommonElementUtils;
+import org.skefir.data.OptionFilterable;
+import org.skefir.elements.CommonElementUtils;
 import io.qameta.allure.Allure;
 
 import java.util.Set;

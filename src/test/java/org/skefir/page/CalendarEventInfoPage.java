@@ -1,12 +1,12 @@
-package page;
+package org.skefir.page;
 
-import data.*;
-import elements.CalendarEventInfoElements;
-import elements.DataTable;
-import elements.TabControl;
+import org.skefir.data.*;
+import org.skefir.elements.CalendarEventInfoElements;
+import org.skefir.elements.DataTable;
+import org.skefir.elements.TabControl;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
-import util.DateUtils;
+import org.skefir.util.DateUtils;
 
 import java.time.LocalDate;
 import java.util.EnumSet;
