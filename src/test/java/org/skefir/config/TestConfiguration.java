@@ -40,7 +40,7 @@ public class TestConfiguration {
         System.setProperty("chromeoptions.args", "--user-agent=" + instance.getString("seleinide.browser.useragent"
                 , "Mozilla/5.0 (compatible; Googlebot/2.1; +https://www.google.com/bot.html)"));
 
-        Configuration.headless = instance.getBoolean("selenide.browser.headless", false);
+        Configuration.headless = instance.getBoolean("selenide.browser.headless", true);
 
 
     }
