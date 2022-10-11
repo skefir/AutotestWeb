@@ -24,6 +24,7 @@ public class BasePage<T extends BasePage<T>> {
         return optionSet.stream().anyMatch(e -> e.getTitle().equals(labelOption) || e.getAltTitle().equals(labelOption));
     }
 
+
     protected <O extends OptionFilterable> T setFilterCheckboxGroup(SelenideElement filterElement, Set<O> optionSet) {
         elementHelper.getFilterOptions(filterElement).asFixedIterable()
                 .forEach(filterOption -> setFilterOptionCheckbox(filterOption,

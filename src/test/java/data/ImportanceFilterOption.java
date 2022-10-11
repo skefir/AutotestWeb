@@ -20,4 +20,9 @@ public enum ImportanceFilterOption implements OptionFilterable {
         return getTitle().toUpperCase();
     }
 
+    @Override
+    public String toString() {
+        return name() + "-" +  getTitle() + "(" + getAltTitle() + ")";
+    }
+
 }

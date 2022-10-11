@@ -1,5 +1,6 @@
 package page;
 
+import com.codeborne.selenide.Selenide;
 import data.CalendarTableColumn;
 import data.Currencies;
 import data.DateFilterOptions;
@@ -44,9 +45,9 @@ public class CalendarPage extends BasePage<CalendarPage> {
     }
 
     @Step("Заходим в событие с порядковым номером {0}")
-    public CalendarPage enterToEventByNumber(int eventNumber) {
+    public CalendarEventInfoPage enterToEventByNumber(int eventNumber) {
         log.info("Заходим в событие с порядковым номером {}", eventNumber);
         calendarMainDataTable.getColumn(calendarMainDataTable.getRowByNumber(eventNumber), CalendarTableColumn.EVENT).$("a").click();
-        return getCurrentPage();
+        return Selenide.page(CalendarEventInfoPage.class);
     }
 }
