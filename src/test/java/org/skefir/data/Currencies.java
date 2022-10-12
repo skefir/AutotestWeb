@@ -1,5 +1,8 @@
 package org.skefir.data;
 
+/**
+ * фильтр валюты в календаре
+ */
 public enum Currencies implements OptionFilterable  {
     AUD("Australian Dollar"),
     BRL("Brazilian real"),

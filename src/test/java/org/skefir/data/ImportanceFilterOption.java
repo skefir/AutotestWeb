@@ -2,6 +2,9 @@ package org.skefir.data;
 
 import lombok.Getter;
 
+/**
+ * фильтр важности в календаре
+ */
 public enum ImportanceFilterOption implements OptionFilterable {
     HOLIDAYS("Holidays"),
     LOW("Low"),

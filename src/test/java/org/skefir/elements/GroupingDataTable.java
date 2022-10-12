@@ -10,11 +10,21 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-public class GropingDataTable<E extends DataTableColumn> extends DataTable<E> {
+/**
+ * Класс для работы с компонентом таблицы с группировкой столбцов
+ * @param <E> - параметр наследник типа набора столбцов таблицы
+ */
+public class GroupingDataTable<E extends DataTableColumn> extends DataTable<E> {
 
     protected AtomicBoolean initFlag = new AtomicBoolean(false);
 
-    public GropingDataTable(SelenideElement rootElement, String classPrefix, Set<E> columns) {
+    /**
+     *
+     * @param rootElement - doomelement - содержащий в себе таблицу
+     * @param classPrefix - префикс css классов таблицы
+     * @param columns - ограниченный набор колонок таблицы
+     */
+    public GroupingDataTable(SelenideElement rootElement, String classPrefix, Set<E> columns) {
         super(rootElement, classPrefix, columns);
     }
 
@@ -35,8 +45,9 @@ public class GropingDataTable<E extends DataTableColumn> extends DataTable<E> {
     @Synchronized
     private void calculateColumnNumbers() {
         if (!initFlag.get()) {
-            List<String> headerList = getTableHeaders().asFixedIterable()
-                    .stream().map(element -> element.getOwnText().trim()).collect(Collectors.toList());
+            List<String> headerList = getTableHeaders().asFixedIterable().stream()
+                    .map(element -> element.getOwnText().trim())
+                    .collect(Collectors.toList());
             columns.forEach(column -> {
                 int index = headerList.indexOf(column.getTitle());
                 if (index != -1) {

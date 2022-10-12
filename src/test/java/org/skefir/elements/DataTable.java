@@ -10,6 +10,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Класс для работы со стандартным для системы компонентом таблицы
+ * @param <E> - параметр наследник типа набора столбцов таблицы
+ */
+
 public class DataTable<E extends DataTableColumn> {
 
     protected final SelenideElement rootElement;
@@ -20,6 +25,12 @@ public class DataTable<E extends DataTableColumn> {
 
     protected Map<E, Integer> columnsNumbers;
 
+    /**
+     *
+     * @param rootElement - doomelement - содержащий в себе таблицу
+     * @param classPrefix - префикс css классов таблицы
+     * @param columns - ограниченный набор колонок таблицы
+     */
     public DataTable(SelenideElement rootElement, String classPrefix, Set<E> columns) {
         this.rootElement = rootElement;
         this.classPrefix = classPrefix;
@@ -63,9 +74,12 @@ public class DataTable<E extends DataTableColumn> {
     }
 
     public Observable<SelenideElement> getRowStream() {
+        //получаем колекцию страниц пейджинатора
         ElementsCollection pagerCollection = getBottomArea().$$("a");
+        //если страница 1 то колеция пуста добавляем туда 1 элемент страницы
         Observable<SelenideElement> paginationStream = pagerCollection.size() > 0 ?
                 Observable.from(pagerCollection.asDynamicIterable()) : Observable.from(rootElement.$$("div[class*='table__bottom']"));
+        //конвертируем поток пейджей в поток строк
         return paginationStream.flatMap(this::getRowsOnPage);
     }
 

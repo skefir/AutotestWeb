@@ -19,7 +19,7 @@ public class BaseTestExtension implements BeforeAllCallback, BeforeEachCallback,
 
     @Override
     public void beforeAll(ExtensionContext context) throws Exception {
-        if (CONFIG.getString("eleinide.driverPath", null) == null) {
+        if (CONFIG.getString("selenide.driverPath", null) == null) {
             ChromeDriverManager.getInstance().setup();
         }
     }
@@ -34,9 +34,9 @@ public class BaseTestExtension implements BeforeAllCallback, BeforeEachCallback,
         openBrowser(CONFIG.getString("urls.metaUrl"));
     }
 
-    @Step("Откурываем страницу {0}")
+    @Step("Открываем страницу {0}")
     private static void openBrowser(String url) {
-        log.info("Откурываем страницу {}", url);
+        log.info("Открываем страницу {}", url);
         Selenide.open(url);
     }
 

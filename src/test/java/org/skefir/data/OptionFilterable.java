@@ -1,5 +1,8 @@
 package org.skefir.data;
 
+/**
+ * опция фильтра
+ */
 public interface OptionFilterable {
     String getTitle();
 

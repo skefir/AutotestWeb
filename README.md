@@ -11,22 +11,22 @@
 Переменные конфигурации
 
 * **urls.metaUrl** - базовый адрес тестируемой системы по умолчанию - https://www.mql5.com/en/economic-calendar
-* **seleinide.browser.name** - имя браузера по умолчанию - chrome
-* **seleinide.browser.version** - версия браузера по умолчанию - 101
-* **seleinide.browser.useragent** - значение хидера user-agent по умолчанию - Mozilla/5.0 (compatible; Googlebot/2.1; +https://www.google.com/bot.html)
-* **seleinide.report.screenshots** - флаг добавления в отчет скриншотов по уммолчанию - true
-* **seleinide.report.savePageSource** - флаг добавления в отчет html snapshot'а страницы по умолчанию - false
-* **seleinide.report.includeSelenideSteps** - флаг добавления в отчет шагов selenide по умолчанию - false
-* **seleinide.timout** - таймаут seleinide по умолчанию -  10000
+* **selenide.browser.name** - имя браузера по умолчанию - chrome
+* **selenide.browser.version** - версия браузера по умолчанию - 101
+* **selenide.browser.useragent** - значение хидера user-agent по умолчанию - Mozilla/5.0 (compatible; Googlebot/2.1; +https://www.google.com/bot.html)
+* **selenide.report.screenshots** - флаг добавления в отчет скриншотов по умолчанию - true
+* **selenide.report.savePageSource** - флаг добавления в отчет html snapshot'а страницы по умолчанию - false
+* **selenide.report.includeSelenideSteps** - флаг добавления в отчет шагов selenide по умолчанию - false
+* **selenide.timeout** - таймаут selenide по умолчанию -  10000
 * **selenide.browser.size** - разрешения браузера по умолчанию - 1920x1080  
-* **seleinide.driverPath** - путь к драйверу браузера если пуст будет использоваться автоматическая настройка через DriverManager
+* **selenide.driverPath** - путь к драйверу браузера если пуст, будет использоваться автоматическая настройка через DriverManager
 * **selenide.remote.url** - путь к серверу удаленного запуска, если пуст запуск происходит локально
 * **selenide.browser.headless** - флаг запуска браузера в режиме без UI по умолчанию - true
 
 ## Получение отчета
 для сборки проекта необходим установленный **gradle**
-для генерации отчета в дериктории проекта запустить **gradle clean test** при этом текстовый отчет будет 
-сгененрирован в файл **report.log**
+для генерации отчета в директории проекта запустить **gradle clean test** при этом текстовый отчет будет 
+сгенерирован в файл **report.log**
 для запуска в браузере **html allure** отчета выполнить команду **gradle allureServe** содержимое таблицы истории
 доступна в качестве аттачмента в шаге **Получаем содержимое таблицы истории**
 

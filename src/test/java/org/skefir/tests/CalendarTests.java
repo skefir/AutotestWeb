@@ -1,5 +1,6 @@
 package org.skefir.tests;
 
+import io.qameta.allure.Description;
 import org.skefir.config.BaseTestExtension;
 import org.skefir.data.*;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +16,9 @@ import java.util.EnumSet;
 public class CalendarTests {
 
     @Test
-    public void expTest() {
+    @Description("Тест проверки фильтрации событий в календаре")
+    public void filterEventsTest() {
+        log.info("Тест проверки фильтрации событий в календаре");
         final EventFilteredCondition eventFilteredCondition =
                 new EventFilteredCondition(EnumSet.of(ImportanceFilterOption.MEDIUM),
                         DateFilterOptions.CURRENT_MONTH, EnumSet.of(Currencies.CHF));

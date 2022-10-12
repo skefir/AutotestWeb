@@ -6,13 +6,16 @@ import org.skefir.data.Currencies;
 import org.skefir.data.DateFilterOptions;
 import org.skefir.data.ImportanceFilterOption;
 import org.skefir.elements.CalendarElements;
-import org.skefir.elements.GropingDataTable;
+import org.skefir.elements.GroupingDataTable;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.EnumSet;
 import java.util.Set;
 
+/**
+ * Класс работы сос страницей календаря
+ */
 @Slf4j
 public class CalendarPage extends BasePage<CalendarPage> {
 
@@ -21,12 +24,12 @@ public class CalendarPage extends BasePage<CalendarPage> {
 
     protected CalendarPageElements elementHelper = new CalendarPageElements();
 
-    private final GropingDataTable<CalendarTableColumn> calendarMainDataTable =
-            new GropingDataTable<>(elementHelper.getMainTable(), "ec-table", EnumSet.allOf(CalendarTableColumn.class));
+    private final GroupingDataTable<CalendarTableColumn> calendarMainDataTable =
+            new GroupingDataTable<>(elementHelper.getMainTable(), "ec-table", EnumSet.allOf(CalendarTableColumn.class));
 
-    @Step("Устанавливаем фильтр валют занчениями {0}")
+    @Step("Устанавливаем фильтр валют значениями {0}")
     public CalendarPage setCurrenciesFilter(Set<Currencies> currenciesSet) {
-        log.info("Устанавливаем фильтр валют занчениями {}", currenciesSet);
+        log.info("Устанавливаем фильтр валют значениями {}", currenciesSet);
         return setFilterCheckboxGroup(elementHelper.getCurrenciesFilter(), currenciesSet);
     }
 

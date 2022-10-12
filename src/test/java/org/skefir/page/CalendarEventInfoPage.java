@@ -14,6 +14,10 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Класс работы со со страницей события
+ */
+
 @Slf4j
 public class CalendarEventInfoPage extends BasePage<CalendarEventInfoPage> {
     protected static class CalendarEventInfoPageElements extends Elements implements CalendarEventInfoElements {
@@ -97,7 +101,7 @@ public class CalendarEventInfoPage extends BasePage<CalendarEventInfoPage> {
                     allureHistoryTable.append("\n");
                     allureHistoryTable.append(rowValue);
                 });
-        addAllureDescription("historyTable", allureHistoryTable.toString());
+        addAllureTextAttacment("historyTable", allureHistoryTable.toString());
     }
 
 

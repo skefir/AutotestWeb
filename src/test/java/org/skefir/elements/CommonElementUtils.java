@@ -5,6 +5,9 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.skefir.data.OptionFilterable;
 
+/**
+ * стандартные для всех компонентов системы функции работы с элементами
+ */
 public interface CommonElementUtils {
 
     default ElementsCollection getFilterOptions(SelenideElement rootFilterElement) {

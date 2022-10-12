@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 
+/**
+ * опция фильтра календаря по интервалу дат дат
+ */
 public enum DateFilterOptions implements OptionFilterable {
     //TODO нужно уточнить как начинается неделя в целевой системе возможно с воскресенья
     CURRENT_WEEK("Current week"

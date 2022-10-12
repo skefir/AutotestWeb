@@ -19,12 +19,12 @@ public class TestConfiguration {
 
     private static void createConfig() {
         loadConfiguration();
-        Configuration.timeout = instance.getInt("seleinide.timout", 10000);
-        String browserName = instance.getString("seleinide.browser.name", null);
+        Configuration.timeout = instance.getInt("selenide.timeout", 10000);
+        String browserName = instance.getString("selenide.browser.name", null);
         if (StringUtils.isNotBlank(browserName)) {
             Configuration.browser = browserName;
         }
-        String browserVersion = instance.getString("seleinide.browser.version", null);
+        String browserVersion = instance.getString("selenide.browser.version", null);
         if (StringUtils.isNotBlank(browserVersion)) {
             Configuration.browserVersion = browserVersion;
         }
@@ -34,10 +34,10 @@ public class TestConfiguration {
         }
         Configuration.browserSize = instance.getString("selenide.browser.size", "1920x1080");
         SelenideLogger.addListener("AllureSelenide"
-                , new AllureSelenide().screenshots(instance.getBoolean("seleinide.report.screenshots", true))
-                        .savePageSource(instance.getBoolean("seleinide.report.savePageSource", false))
-                        .includeSelenideSteps(instance.getBoolean("seleinide.report.includeSelenideSteps", false)));
-        System.setProperty("chromeoptions.args", "--user-agent=" + instance.getString("seleinide.browser.useragent"
+                , new AllureSelenide().screenshots(instance.getBoolean("selenide.report.screenshots", true))
+                        .savePageSource(instance.getBoolean("selenide.report.savePageSource", false))
+                        .includeSelenideSteps(instance.getBoolean("selenide.report.includeSelenideSteps", false)));
+        System.setProperty("chromeoptions.args", "--user-agent=" + instance.getString("selenide.browser.useragent"
                 , "Mozilla/5.0 (compatible; Googlebot/2.1; +https://www.google.com/bot.html)"));
 
         Configuration.headless = instance.getBoolean("selenide.browser.headless", true);
