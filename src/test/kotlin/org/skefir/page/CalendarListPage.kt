@@ -51,11 +51,11 @@ class CalendarListPage(page: Page) : BasePagePW<CalendarListPage>(page) {
         return setFilterRadio(calendarHelper.getDateFilter(), dateFilterOptions)
     }
 
-//    @Step("Заходим в событие с порядковым номером {0}")
-//    fun enterToEventByNumber(eventNumber: Int): CalendarEventInfoPage {
-//        log.info("Заходим в событие с порядковым номером {}", eventNumber)
-//        calendarMainDataTable.getColumn(calendarMainDataTable.getRowByNumber(eventNumber), CalendarTableColumn.EVENT)
-//            .`$`("a").click()
-////        return Selenide.page(CalendarEventInfoPage::class.java)
-//    }
+    @Step("Заходим в событие с порядковым номером {0}")
+    fun enterToEventByNumber(eventNumber: Int): CalendarEventInfoPWPage {
+        log.info("Заходим в событие с порядковым номером {}", eventNumber)
+        calendarMainDataTable.getColumn(calendarMainDataTable.getRowByNumber(eventNumber), CalendarTableColumn.EVENT)
+            .locator("a").click()
+        return CalendarEventInfoPWPage(page)
+    }
 }

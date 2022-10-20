@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.skefir.conf.BaseTestPWExtension
 import org.skefir.conf.TestConfig
-import org.skefir.data.Currencies
-import org.skefir.data.DateFilterOptions
-import org.skefir.data.ImportanceFilterOption
-import org.skefir.data.EventFilteredCondition
+import org.skefir.data.*
 import org.skefir.page.CalendarListPage
 import java.util.*
 
@@ -15,7 +12,7 @@ import java.util.*
 class CalendarPWTests {
 
     @Test
-    fun expTest() {
+    fun calendarFilterTest() {
         val eventFilteredCondition = EventFilteredCondition(
             EnumSet.of(ImportanceFilterOption.MEDIUM),
             DateFilterOptions.CURRENT_MONTH, EnumSet.of(Currencies.CHF)
@@ -27,5 +24,10 @@ class CalendarPWTests {
         calndarPage.setCurrenciesFilter(eventFilteredCondition.currenciesSet)
             .setDateFilter(eventFilteredCondition.dateFilterOption)
             .setImportanceFilter(eventFilteredCondition.importanceSet)
+            .enterToEventByNumber(1)
+            .checkEventInfo(eventFilteredCondition)
+            .goToTab(CalendarEventInfoTab.HISTORY)
+            .printHistoryToLog()
+
     }
 }

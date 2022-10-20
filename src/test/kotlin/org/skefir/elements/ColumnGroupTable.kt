@@ -38,7 +38,7 @@ class ColumnGroupTable<E : DataTableColumn>(rootElement: Locator, classPrefix: S
     }
 
     override fun getRowByNumber(rowNumber: Int): Locator {
-        return rootElement.locator("div.${classPrefix}__body div.${classPrefix}__item:nth-child(${rowNumber})")
+        return rootElement.locator("div.${classPrefix}__body div.${classPrefix}__item:nth-child(${rowNumber-1})")
     }
 
     override fun getColumn(rowElement: Locator, column: E): Locator {
