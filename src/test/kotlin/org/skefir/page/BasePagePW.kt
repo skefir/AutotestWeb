@@ -11,7 +11,7 @@ fun Locator.sequence() : Sequence<Pair<Int, Locator>> {
         return emptySequence()
     }
     return generateSequence(Pair(0, this.nth(0)))
-    { if (it.first<this.count()) Pair(it.first+1, this.nth(it.first+1)) else null}
+    { if (it.first<this.count()-1) Pair(it.first+1, this.nth(it.first+1)) else null}
 }
 
 /**
