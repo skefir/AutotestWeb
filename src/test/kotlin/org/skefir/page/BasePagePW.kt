@@ -18,7 +18,7 @@ fun Locator.sequence() : Sequence<Pair<Int, Locator>> {
  * Базовый класс страницы, где собраны методы общие для всей тестируемой системы
  * @param <T> - Тип страницы наследника, для поддержки chain вызовов в потомках
 </T> */
-open class BasePagePW<T : BasePagePW<T>?>(val page: Page) {
+open class BasePagePW<T : BasePagePW<T>>(val page: Page) {
     /**
      * Класс помошник где собраны элементы страницы, реализация через интерфейсы позволяет использовать блоки
      * компонентов переиспользуемые на сайте
@@ -33,6 +33,7 @@ open class BasePagePW<T : BasePagePW<T>?>(val page: Page) {
      * Функция возврата текущей страницы с учетом того что в потомках необходимо возвращать тип потомка
      * @return - объект текущей страницы
      */
+    @Suppress("UNCHECKED_CAST")
     protected val currentPage: T
         get() = this as T
 
