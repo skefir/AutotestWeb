@@ -93,13 +93,11 @@ class CalendarEventInfoPWPage(page: Page) : BasePagePW<CalendarEventInfoPWPage>(
             EventHistoryColumn.DATE, EventHistoryColumn.ACTUAL,
             EventHistoryColumn.FORECAST, EventHistoryColumn.PREVIOUS
         )
-        val header = String.format(
-            "| %-25s             | %20s | %20s | %20s |",
-            EventHistoryColumn.DATE.getTitle(),
-            EventHistoryColumn.ACTUAL.getTitle(),
-            EventHistoryColumn.FORECAST.getTitle(),
-            EventHistoryColumn.PREVIOUS.getTitle()
-        )
+        val header = "| ${EventHistoryColumn.DATE.getTitle().padEnd(25)}             | " +
+                "${EventHistoryColumn.ACTUAL.getTitle().padStart(20)}" +
+                " | ${EventHistoryColumn.FORECAST.getTitle().padStart(20)} " +
+                "| ${EventHistoryColumn.PREVIOUS.getTitle().padStart(20)} |"
+
         val allureHistoryTable = StringBuilder(header)
         log.info(header)
         eventHistoryTable.getRowStream().map {
@@ -114,13 +112,11 @@ class CalendarEventInfoPWPage(page: Page) : BasePagePW<CalendarEventInfoPWPage>(
                 ).isAfter(LocalDate.now().minusMonths(12))
             }
             .forEach { e: Map<EventHistoryColumn, String> ->
-                val rowValue = String.format(
-                    "| %-25s             | %20s | %20s | %20s |",
-                    e[EventHistoryColumn.DATE],
-                    e[EventHistoryColumn.ACTUAL],
-                    e[EventHistoryColumn.FORECAST],
-                    e[EventHistoryColumn.PREVIOUS]
-                )
+                val rowValue =
+                    "| ${e[EventHistoryColumn.DATE]?.trim()?.padEnd(25)}             | " +
+                            "${e[EventHistoryColumn.ACTUAL]?.trim()?.padStart(20)}" +
+                            " | ${e[EventHistoryColumn.FORECAST]?.trim()?.padStart(20)} " +
+                            "| ${e[EventHistoryColumn.PREVIOUS]?.trim()?.padStart(20)} |"
                 log.info(rowValue)
                 allureHistoryTable.append("\n")
                 allureHistoryTable.append(rowValue)
