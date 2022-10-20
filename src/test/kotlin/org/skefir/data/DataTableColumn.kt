@@ -1,4 +1,4 @@
-package org.skefir.entity
+package org.skefir.data
 
 interface DataTableColumn {
     fun getTitle(): String

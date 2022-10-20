@@ -17,6 +17,6 @@ interface CommonUtils {
     }
 
     fun getFilterOption(rootFilterElement: Locator, option: OptionFilterable): Locator {
-        return rootFilterElement.locator("li label:has-text('" + option.title + "')")
+        return rootFilterElement.locator("li label:has-text('${option.getTitle()}')")
     }
 }

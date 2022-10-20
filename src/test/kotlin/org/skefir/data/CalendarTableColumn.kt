@@ -1,4 +1,4 @@
-package org.skefir.entity
+package org.skefir.data
 
 
 
@@ -13,7 +13,6 @@ enum class CalendarTableColumn(private val title: String) : DataTableColumn {
     override fun getTitle(): String {
         return title
     }
-    override fun getColumnByTitle(title: String): DataTableColumn {
-        return CalendarTableColumn.values().filter { it.title == title }.first()
-    }
+    override fun getColumnByTitle(title: String): DataTableColumn = values().first { it.title == title }
+
 }

@@ -2,7 +2,7 @@ package org.skefir.elements
 
 import com.microsoft.playwright.Locator
 import lombok.Synchronized
-import org.skefir.entity.DataTableColumn
+import org.skefir.data.DataTableColumn
 import org.skefir.page.sequence
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -17,7 +17,7 @@ class ColumnGroupTable<E : DataTableColumn>(rootElement: Locator, classPrefix: S
         }
         return columnsNumbers.computeIfAbsent(
             column
-        ) { k: E -> throw IllegalStateException("Can't find key $column in $columns") }
+        ) { _: E -> throw IllegalStateException("Can't find key $column in $columns") }
     }
 
     protected fun getTableHeaders(): Locator {

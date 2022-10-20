@@ -1,8 +1,6 @@
-package org.skefir.entity
+package org.skefir.data
 
 import org.skefir.data.Currencies
-import org.skefir.data.DateFilterOptions
-import org.skefir.data.ImportanceFilterOption
 
 data class EventFilteredCondition(
     var importanceSet: Set<ImportanceFilterOption>,

@@ -1,7 +1,7 @@
 package org.skefir.elements
 
 import com.microsoft.playwright.Locator
-import org.skefir.entity.DataTableColumn
+import org.skefir.data.DataTableColumn
 import org.skefir.page.sequence
 
 /**
