@@ -2,9 +2,8 @@ package org.skefir.page
 
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
-import io.qameta.allure.Allure
-import org.skefir.elements.CommonUtils
 import org.skefir.data.OptionFilterable
+import org.skefir.elements.CommonUtils
 
 fun Locator.sequence(): Sequence<Pair<Int, Locator>> {
     if (this.count() < 1) {
@@ -83,8 +82,6 @@ open class BasePagePW<T : BasePagePW<T>>(val page: Page) {
         return currentPage
     }
 
-    companion object {
-        protected fun addAllureTextAttachment(title: String, body: String) =
-            Allure.addAttachment(title, body)
-    }
 }
+
+

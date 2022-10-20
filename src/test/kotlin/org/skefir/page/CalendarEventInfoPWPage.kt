@@ -8,13 +8,17 @@ import org.skefir.data.*
 import org.skefir.elements.CalendarEventInfoPWElements
 import org.skefir.elements.DataTablePW
 import org.skefir.elements.TabControl
-import org.skefir.util.DateUtils
+import org.skefir.util.addAllureTextAttachment
+import org.skefir.util.convertDate
+import org.skefir.util.convertDateTime
 import java.time.LocalDate
 import java.util.*
 
 private val log = KotlinLogging.logger {}
 
 class CalendarEventInfoPWPage(page: Page) : BasePagePW<CalendarEventInfoPWPage>(page) {
+
+
     protected inner class CalendarEventInfoElements() : Elements(), CalendarEventInfoPWElements {
         override fun getPage(): Page {
             return page
@@ -72,7 +76,7 @@ class CalendarEventInfoPWPage(page: Page) : BasePagePW<CalendarEventInfoPWPage>(
     @Step("Проверяем что событие попадает в заданный интервал дат {0}")
     fun checkDate(dateFilterOptions: DateFilterOptions): CalendarEventInfoPWPage {
         log.info("Проверяем что событие попадает в заданный интервал дат {}", dateFilterOptions)
-        val eventDate = DateUtils.convertDateTime(eventInfoHelper.getEventDate().textContent()).toLocalDate()
+        val eventDate = convertDateTime(eventInfoHelper.getEventDate().textContent()).toLocalDate()
         Assertions.assertTrue(
             eventDate.isAfter(dateFilterOptions.beginPeriod)
                     && eventDate.isBefore(dateFilterOptions.finishPeriod),
@@ -105,8 +109,8 @@ class CalendarEventInfoPWPage(page: Page) : BasePagePW<CalendarEventInfoPWPage>(
             )
         }
             .takeWhile { e: Map<EventHistoryColumn, String> ->
-                DateUtils.convertDate(
-                    e[EventHistoryColumn.DATE]
+                convertDate(
+                    e[EventHistoryColumn.DATE] ?: ""
                 ).isAfter(LocalDate.now().minusMonths(12))
             }
             .forEach { e: Map<EventHistoryColumn, String> ->
@@ -121,6 +125,6 @@ class CalendarEventInfoPWPage(page: Page) : BasePagePW<CalendarEventInfoPWPage>(
                 allureHistoryTable.append("\n")
                 allureHistoryTable.append(rowValue)
             }
-        BasePage.addAllureTextAttacment("historyTable", allureHistoryTable.toString())
+        addAllureTextAttachment("historyTable", allureHistoryTable.toString())
     }
 }

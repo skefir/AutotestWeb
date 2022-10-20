@@ -12,6 +12,7 @@ import java.util.*
 class CalendarPWTests {
 
     @Test
+
     fun calendarFilterTest() {
         val eventFilteredCondition = EventFilteredCondition(
             EnumSet.of(ImportanceFilterOption.MEDIUM),
@@ -20,14 +21,13 @@ class CalendarPWTests {
         val browser = TestConfig.getBrowser()
         val page = browser.newPage()
         page.navigate(TestConfig.configProperties.getString("urls.metaUrl"))
-        val calndarPage = CalendarListPage(page)
-        calndarPage.setCurrenciesFilter(eventFilteredCondition.currenciesSet)
+        val calendarPage = CalendarListPage(page)
+        calendarPage.setCurrenciesFilter(eventFilteredCondition.currenciesSet)
             .setDateFilter(eventFilteredCondition.dateFilterOption)
             .setImportanceFilter(eventFilteredCondition.importanceSet)
             .enterToEventByNumber(1)
             .checkEventInfo(eventFilteredCondition)
             .goToTab(CalendarEventInfoTab.HISTORY)
             .printHistoryToLog()
-
     }
 }

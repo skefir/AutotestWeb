@@ -2,6 +2,7 @@ package org.skefir.elements
 
 import com.microsoft.playwright.Locator
 import lombok.Synchronized
+import org.skefir.data.CalendarTableColumn
 import org.skefir.data.DataTableColumn
 import org.skefir.page.sequence
 import java.util.concurrent.atomic.AtomicBoolean
@@ -27,21 +28,23 @@ class ColumnGroupTable<E : DataTableColumn>(rootElement: Locator, classPrefix: S
     @Synchronized
     private fun calculateColumnNumbers() {
         if (!initFlag.get()) {
-            columnsNumbers = getTableHeaders().sequence()
+            val headerMap = getTableHeaders().sequence()
                 .map { (i, l)
                     ->
-                    @Suppress("UNCHECKED_CAST")
-                    columns.first().getColumnByTitle(l.textContent().trim()) as E to i
-                }.toMap().toMutableMap()
+
+                    //TODO поменть
+                    (if(l.textContent().trim().startsWith(CalendarTableColumn.TIME.getTitle())) CalendarTableColumn.TIME.getTitle() else l.textContent().trim())   to i
+                }.toMap()
+            columnsNumbers = columns.map { it to headerMap.getOrDefault(it.getTitle(), -1)}.toMap().toMutableMap()
             initFlag.set(true)
         }
     }
 
     override fun getRowByNumber(rowNumber: Int): Locator {
-        return rootElement.locator("div.${classPrefix}__body div.${classPrefix}__item:nth-child(${rowNumber-1})")
+        return rootElement.locator("div.${classPrefix}__body div.${classPrefix}__item").nth(rowNumber-1).also { println(it.textContent()) }
     }
 
     override fun getColumn(rowElement: Locator, column: E): Locator {
-        return rowElement.locator(".${classPrefix}__col:nth-child(${getColumnNumber(column)})")
+        return rowElement.locator(".${classPrefix}__col").nth(getColumnNumber(column))
     }
 }

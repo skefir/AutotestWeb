@@ -26,6 +26,6 @@ object TestConfig {
     }
 
     fun getBrowser(): Browser {
-        return playwright.chromium().launch(BrowserType.LaunchOptions().setHeadless(false))
+        return playwright.chromium().launch(BrowserType.LaunchOptions().setHeadless(configProperties.getBoolean("selenide.browser.headless",false)))
     }
 }

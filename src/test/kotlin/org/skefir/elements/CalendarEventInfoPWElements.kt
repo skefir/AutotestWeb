@@ -12,7 +12,7 @@ interface CalendarEventInfoPWElements : PlaywrightPage {
     fun getEventImportance(): Locator = getEventRoot().locator(".event-table__importance")
 
 
-    fun getEventDate(): Locator = getEventRoot().locator("td.event-table__date")
+    fun getEventDate(): Locator = getEventRoot().locator("td#actualValueDate")
 
 
     fun getEventTabControl(): Locator = getEventRoot().locator("ul#calendar-tabs")
