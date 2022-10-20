@@ -3,15 +3,15 @@ package org.skefir.page
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
 import io.qameta.allure.Allure
-import org.skefir.data.OptionFilterable
 import org.skefir.elements.CommonUtils
+import org.skefir.data.OptionFilterable
 
-fun Locator.sequence() : Sequence<Pair<Int, Locator>> {
-    if (this.count()<1) {
+fun Locator.sequence(): Sequence<Pair<Int, Locator>> {
+    if (this.count() < 1) {
         return emptySequence()
     }
     return generateSequence(Pair(0, this.nth(0)))
-    { if (it.first<this.count()-1) Pair(it.first+1, this.nth(it.first+1)) else null}
+    { if (it.first < this.count() - 1) Pair(it.first + 1, this.nth(it.first + 1)) else null }
 }
 
 /**
@@ -19,6 +19,7 @@ fun Locator.sequence() : Sequence<Pair<Int, Locator>> {
  * @param <T> - Тип страницы наследника, для поддержки chain вызовов в потомках
 </T> */
 open class BasePagePW<T : BasePagePW<T>>(val page: Page) {
+//    protected final
     /**
      * Класс помошник где собраны элементы страницы, реализация через интерфейсы позволяет использовать блоки
      * компонентов переиспользуемые на сайте
@@ -45,16 +46,21 @@ open class BasePagePW<T : BasePagePW<T>>(val page: Page) {
      * @return true если опция присутствует в наборе
      * @param <O> - параметризованый тип расширяющий тип опции фильтрации
     </O> */
-    protected fun <O : OptionFilterable?> isOptionContains(optionSet: Set<O>, labelOption: String): Boolean {
-        return optionSet.stream().anyMatch { e: O -> e!!.title == labelOption || e.altTitle == labelOption }
+    protected fun <O : OptionFilterable> isOptionContains(optionSet: Set<O>, labelOption: String): Boolean {
+        return optionSet.stream().anyMatch { e: O -> e.getTitle() == labelOption || e.getAltTitle() == labelOption }
     }
 
-    protected fun <O : OptionFilterable?> setFilterCheckboxGroup(
+    protected fun <O : OptionFilterable> setFilterCheckboxGroup(
         filterElement: Locator,
         optionSet: Set<O>
     ): T {
         elementHelper.getFilterOptions(filterElement).sequence()
-            .forEach{ setFilterOptionCheckbox(it.second, isOptionContains(optionSet, elementHelper.getFilterOptionLabel(it.second).textContent()?:""))}
+            .forEach {
+                setFilterOptionCheckbox(
+                    it.second,
+                    isOptionContains(optionSet, elementHelper.getFilterOptionLabel(it.second).textContent() ?: "")
+                )
+            }
         return currentPage
     }
 
@@ -78,8 +84,7 @@ open class BasePagePW<T : BasePagePW<T>>(val page: Page) {
     }
 
     companion object {
-        protected fun addAllureTextAttachment(title: String, body: String) {
+        protected fun addAllureTextAttachment(title: String, body: String) =
             Allure.addAttachment(title, body)
-        }
     }
 }

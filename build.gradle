@@ -75,6 +75,10 @@ dependencies {
     // https://mvnrepository.com/artifact/com.microsoft.playwright/playwright
     implementation group: 'com.microsoft.playwright', name: 'playwright', version: '1.27.1'
 
+    // https://mvnrepository.com/artifact/io.github.microutils/kotlin-logging
+    implementation group: 'io.github.microutils', name: 'kotlin-logging', version: '3.0.2'
+
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
 }

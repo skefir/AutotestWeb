@@ -7,7 +7,7 @@ import org.skefir.conf.TestConfig
 import org.skefir.data.Currencies
 import org.skefir.data.DateFilterOptions
 import org.skefir.data.ImportanceFilterOption
-import org.skefir.entity.EventFilteredCondition
+import org.skefir.data.EventFilteredCondition
 import org.skefir.page.CalendarListPage
 import java.util.*
 
@@ -25,5 +25,7 @@ class CalendarPWTests {
         page.navigate(TestConfig.configProperties.getString("urls.metaUrl"))
         val calndarPage = CalendarListPage(page)
         calndarPage.setCurrenciesFilter(eventFilteredCondition.currenciesSet)
+            .setDateFilter(eventFilteredCondition.dateFilterOption)
+            .setImportanceFilter(eventFilteredCondition.importanceSet)
     }
 }

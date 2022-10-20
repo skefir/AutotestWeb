@@ -6,6 +6,9 @@ import org.skefir.data.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.skefir.data.CalendarEventInfoTab;
+import org.skefir.data.DateFilterOptions;
+import org.skefir.data.ImportanceFilterOption;
 import org.skefir.page.CalendarPage;
 
 import java.util.EnumSet;
