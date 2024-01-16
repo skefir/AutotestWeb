@@ -30,8 +30,7 @@ allure {
     }
 }
 
-sourceCompatibility = 1.8
-
+sourceCompatibility = 17
 repositories {
     mavenCentral()
 }
@@ -48,7 +47,11 @@ dependencies {
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 
     // https://mvnrepository.com/artifact/com.codeborne/selenide
-    implementation group: 'com.codeborne', name: 'selenide', version: '6.8.1'
+    implementation group: 'com.codeborne', name: 'selenide', version: '7.0.4'
+
+
+
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.6.3'
 
     // https://mvnrepository.com/artifact/io.qameta.allure/allure-selenide
     implementation group: 'io.qameta.allure', name: 'allure-selenide', version: '2.19.0'
