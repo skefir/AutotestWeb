@@ -71,8 +71,8 @@ public class CalendarEventInfoPage extends BasePage<CalendarEventInfoPage> {
     public CalendarEventInfoPage checkDate(DateFilterOptions dateFilterOptions) {
         log.info("Проверяем что событие попадает в заданный интервал дат {}", dateFilterOptions);
         LocalDate eventDate = DateUtils.convertDateTime(elementHelper.getEventDate().getText()).toLocalDate();
-        assertTrue(eventDate.isAfter(dateFilterOptions.getBeginPeriod())
-                        && eventDate.isBefore(dateFilterOptions.getFinishPeriod())
+        assertTrue(eventDate.isAfter(dateFilterOptions.getBeginPeriod().minusDays(1))
+                        && eventDate.isBefore(dateFilterOptions.getFinishPeriod().plusDays(1))
                 , String.format("Дата события %s должна находиться в периоде %s", eventDate, dateFilterOptions));
         return this;
     }
